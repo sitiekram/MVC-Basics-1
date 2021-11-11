@@ -36,6 +36,10 @@ namespace MVC_Basics_1
                      name: "Default",
                      pattern: "{controller=Home}/{action=Index}/{id?}"
                      );
+                endpoints.MapControllerRoute(
+                    name: "Doctor",
+                    pattern: "FeverCheck",
+                    defaults: new { controller = "Doctor", action = "Patient" });
             });
         }
     }
