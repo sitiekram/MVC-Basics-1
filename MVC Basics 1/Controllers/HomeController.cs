@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC_Basics_1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,20 @@ namespace MVC_Basics_1.Controllers
         }
         public IActionResult Projects()
         {
+            return View();
+        }
+        public IActionResult Guess()
+        {
+            GuessModel gs = new GuessModel(this);
+            gs.SetRandomNumber();
+            return View(gs);
+        }
+        [HttpPost]
+        public IActionResult Guess(int guessNumber)
+        {
+            GuessModel gs = new GuessModel(this);
+            gs.GetRandomNumber();
+            ViewBag.Message = gs.GuessNumber(guessNumber);
             return View();
         }
     }

@@ -25,5 +25,6 @@ namespace MVC_Basics_1.Controllers
             ViewBag.Message = PatientModel.CheckFever(temperature);
             return View();
         }
+     
     }
 }
