@@ -13,6 +13,7 @@ namespace MVC_Basics_1.Models
         private Random rnd;
         public int GuessedNumber { get; set; }
         public int RandomNumber { get; set; }
+        private static int counter = 0;
        
         public GuessModel(HomeController aController)
         {
@@ -35,23 +36,36 @@ namespace MVC_Basics_1.Models
             else 
             {
                 RandomNumber = 1;
+                counter = 0;
             }
         }
 
         public  string GuessNumber(int guessedNumber)
         {
-            string message="";
-            if (RandomNumber < guessedNumber)
+            string message;
+            if (guessedNumber < 1 || guessedNumber > 100)
             {
-                message = "Your guess is too high";
-            }
-            else if (RandomNumber > guessedNumber)
-            {
-                message = "Your guess is too low";
+                message = "Please enter a number between 1 and 100.";
             }
             else
             {
-                message = "Congratulation. You have guessed the word correct.The number is" + guessedNumber;
+                if (RandomNumber < guessedNumber)
+                {
+                    ++counter;
+                    message = $"Your guess is too high\n Guess counter :- {counter}";
+                }
+                else if (RandomNumber > guessedNumber)
+                {
+                    ++counter;
+                    message = $"Your guess is too low\nGuess counter :- {counter}";
+                }
+                else
+                {
+                    ++counter;
+                    message = $"Congratulation. You have guessed the word correct after {counter} tries.The number is {guessedNumber}.\nEnter a number and click 'Submit' button inorder to guess the new number";
+                    this.SetRandomNumber();
+                    counter = 0;
+                }
             }
             return message; 
         }

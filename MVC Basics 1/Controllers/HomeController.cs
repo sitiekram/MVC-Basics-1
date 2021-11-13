@@ -30,14 +30,14 @@ namespace MVC_Basics_1.Controllers
         {
             GuessModel gs = new GuessModel(this);
             gs.SetRandomNumber();
-            return View(gs);
+            return View();
         }
         [HttpPost]
-        public IActionResult Guess(int guessNumber)
-        {
+        public IActionResult Guess(int number)
+        { 
             GuessModel gs = new GuessModel(this);
             gs.GetRandomNumber();
-            ViewBag.Message = gs.GuessNumber(guessNumber);
+            ViewBag.Message = gs.GuessNumber(number);
             return View();
         }
     }
