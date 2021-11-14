@@ -52,12 +52,12 @@ namespace MVC_Basics_1.Models
                 if (RandomNumber < guessedNumber)
                 {
                     ++counter;
-                    message = $"Your guess is too high\n Guess counter :- {counter}";
+                    message = "Your guess is too high  \nGuess counter :- "+counter;
                 }
                 else if (RandomNumber > guessedNumber)
                 {
                     ++counter;
-                    message = $"Your guess is too low\nGuess counter :- {counter}";
+                    message = $"Your guess is too low   \nGuess counter :- {counter}";
                 }
                 else
                 {
