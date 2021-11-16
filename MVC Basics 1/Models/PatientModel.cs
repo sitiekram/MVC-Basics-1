@@ -10,7 +10,7 @@ namespace MVC_Basics_1.Models
         public string Name { get; set; }
         public int Temperature { get; set; }
         
-        public static string CheckFever(float temperature)
+        public static string CheckFever(string name,float temperature)
         {
             string message;
             if (temperature >= 37.5)
