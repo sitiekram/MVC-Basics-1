@@ -22,7 +22,7 @@ namespace MVC_Basics_1.Controllers
         [HttpPost]
         public IActionResult Patient(string name,float temperature)
         {
-            ViewBag.Message = PatientModel.CheckFever(temperature);
+            ViewBag.Message = PatientModel.CheckFever(name,temperature);
             return View();
         }
     }
