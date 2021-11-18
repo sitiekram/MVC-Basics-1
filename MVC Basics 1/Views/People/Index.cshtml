@@ -1,4 +1,4 @@
-﻿@model MVC_Basics_1.Models.PeopleViewModel
+﻿@model PeopleViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -8,11 +8,10 @@
         @Html.AntiForgeryToken()
         <div>
             <h4>Filter</h4>
-            <label asp-for="FilterString" value="Filter String"></label>
+            <label asp-for="FilterString"></label>
             <input asp-for="FilterString"/>
             <input type="submit"class="btn btn-primary" value="Search" />
         </div>
-
     </form>
 </div>
 <div>

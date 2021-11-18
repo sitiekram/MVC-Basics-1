@@ -56,10 +56,10 @@ namespace MVC_Basics_1.Controllers
                 peopleView.Email = createPerson.Email;
                peopleView.PersonList = peopleView.Read();
                 peopleView.Create(createPerson.FullName, createPerson.City, createPerson.PhoneNumber, createPerson.Email);
-                ViewBag.Message = "SuccessfuLLy added person!";
+                ViewBag.Message = "Successfully added person!";
                 return View("Index",peopleView);
             }
-            ViewBag.Message = "Failed to add car";
+            ViewBag.Message = "Failed to add person";
             return View("Index",peopleView);
         }
         [HttpPost]
