@@ -28,6 +28,7 @@ a {
 -------------------------------------------------- */
 html {
     font-size: 14px;
+    padding-left:25px;
 }
 
 @media (min-width: 768px) {
@@ -83,7 +84,7 @@ td {
 }
 
 table {
-    width: 60%;
+    width: 90%;
 }
 
 .footer {

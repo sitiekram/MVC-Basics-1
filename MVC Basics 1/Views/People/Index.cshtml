@@ -33,10 +33,41 @@
         </p>
         <p><input type="submit" value="Save Data" /></p>
     }*@
-<!--<form asp-controller="People" asp-action="Index" method="post">
-<label asp-for="CreatePerson.FirstName"></label>
-<input asp-for="CreatePerson.FirstName" />
-</form>-->
+<div>
+    <form asp-action="Index" method="post" role="form">
+        @Html.AntiForgeryToken()
+        <div>
+            <h3>Filter</h3>
+            <label asp-for="FilterString" value="Filter String"></label>
+            <input asp-for="FilterString" required/>
+            <input type="submit"class="btn btn-primary" value="Search" />
+        </div>
+
+    </form>
+</div>
+<div>
+    <form asp-action="CreatePerson" method="post" role="form">
+        @Html.AntiForgeryToken()
+        <div>
+            <h3><b>Create a new car</b></h3>
+            <label asp-for="FullName"></label>
+            <input asp-for="FullName" />
+            <span style="color:rebeccapurple" asp-validation-for="FullName"></span>
+            <label asp-for="City"></label>
+            <input asp-for="City" />
+            <span style="color:rebeccapurple" asp-validation-for="City"></span>
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" />
+            <span style="color:rebeccapurple" asp-validation-for="PhoneNumber"></span>
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span style="color:rebeccapurple" asp-validation-for="Email"></span>
+         </div>
+        <div>
+            <input type="submit" class="btn btn-primary" name="btnCreatePerson"value="Add Person" />
+        </div>
+    </form>
+</div>
 <h4>List of person</h4>
 <table>
     <tr>
@@ -53,7 +84,8 @@
             <td>@person.City</td>
             <td>@person.PhoneNumber</td>
             <td>@person.Email</td>
-            <td><a href="">Delete</a></td>
+            <td><a href="#" onclick="location.href =
+                    '@Url.Action("DeletePerson","People", new { id=person.PersonId })'">Delete</a></td>
         </tr>
     }
 </table>

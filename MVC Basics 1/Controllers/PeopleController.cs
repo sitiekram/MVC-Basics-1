@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using MVC_Basics_1.Models;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,55 @@ namespace MVC_Basics_1.Controllers
     {
         public IActionResult Index()
         {
-            PeopleMemory peopleMemory = new PeopleMemory();
-
-            PeopleViewModel peopleListViewModel = new PeopleViewModel() { PersonList = peopleMemory.Read() };
-            if (peopleListViewModel.PersonList.Count == 0 || peopleListViewModel.PersonList == null)
+            PeopleViewModel peopleView = new PeopleViewModel();
+            peopleView.PersonList=peopleView.Read();
+            if(peopleView.PersonList.Count == 0 || peopleView.PersonList == null)
             {
-                peopleMemory.SeedPeople();
+                peopleView.SeedPeople();
             }
-            return View(peopleListViewModel);
+            return View(peopleView);
+        }
+        [HttpPost]
+        public IActionResult Index(string filterString)
+        {
+            PeopleViewModel peopleView = new PeopleViewModel();
+            PeopleViewModel filterPersonView = new PeopleViewModel();
+            peopleView.PersonList = peopleView.Read();
+            filterPersonView.PersonList = new List<Person>();
+            foreach (var person in peopleView.PersonList)
+            {
+                if(person.FullName.Contains(filterString) || person.City.Contains(filterString))
+                {
+                    filterPersonView.PersonList.Add(person);
+                }
+            }
+            return View(filterPersonView);
+        }
+        [HttpPost]
+        public IActionResult CreatePerson(CreatePersonViewModel createPerson)
+        {
+            PeopleViewModel peopleView = new PeopleViewModel();
+            if (ModelState.IsValid)
+            {
+                peopleView.FullName = createPerson.FullName;
+                peopleView.City = createPerson.City;
+                peopleView.PhoneNumber = createPerson.PhoneNumber;
+                peopleView.Email = createPerson.Email;
+               peopleView.PersonList = peopleView.Read();
+                peopleView.Create(createPerson.FullName, createPerson.City, createPerson.PhoneNumber, createPerson.Email);
+                ViewBag.Message = "SuccessfuLLy added person!";
+                return View("Index",peopleView);
+            }
+            ViewBag.Message = "Failed to add car";
+            return View("Index",peopleView);
+        }
+        [HttpPost]
+        public IActionResult DeletePerson(int id)
+        {
+            PeopleViewModel peopleView = new PeopleViewModel();
+            Person DeletePerson = peopleView.Read(id);
+            peopleView.Delete(DeletePerson);
+            return RedirectToAction("Index");
         }
     }
 }
