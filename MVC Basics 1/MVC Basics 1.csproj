@@ -6,8 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Views\Projects\" />
+    <Compile Remove="Data\**" />
+    <Compile Remove="Views\Projects\**" />
+    <Content Remove="Data\**" />
+    <Content Remove="Views\Projects\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Views\Projects\**" />
+    <None Remove="Data\**" />
+    <None Remove="Views\Projects\**" />
   </ItemGroup>
 
   <ItemGroup>
