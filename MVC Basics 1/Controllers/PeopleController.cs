@@ -27,11 +27,19 @@ namespace MVC_Basics_1.Controllers
             PeopleViewModel filterPersonView = new PeopleViewModel();
             peopleView.PersonList = peopleView.Read();
             filterPersonView.PersonList = new List<Person>();
-            foreach (var person in peopleView.PersonList)
+            if (filterString == "" || filterString == null)
             {
-                if(person.FullName.Contains(filterString) || person.City.Contains(filterString))
+                filterPersonView.PersonList = peopleView.Read();
+            }
+            else
+            {
+                foreach (var person in peopleView.PersonList)
                 {
-                    filterPersonView.PersonList.Add(person);
+
+                    if (person.FullName.Contains(filterString) || person.City.Contains(filterString))
+                    {
+                        filterPersonView.PersonList.Add(person);
+                    }
                 }
             }
             return View(filterPersonView);
@@ -59,7 +67,15 @@ namespace MVC_Basics_1.Controllers
         {
             PeopleViewModel peopleView = new PeopleViewModel();
             Person DeletePerson = peopleView.Read(id);
-            peopleView.Delete(DeletePerson);
+            bool status=peopleView.Delete(DeletePerson);
+            if (status)
+            {
+                ViewBag.Message = "Successfully deleted person!";
+            }
+            else
+            {
+                ViewBag.Message = "Failed to delete the person";
+            }
             return RedirectToAction("Index");
         }
     }

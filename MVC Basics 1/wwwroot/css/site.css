@@ -71,14 +71,12 @@ table, th, tr, td {
     border-collapse: collapse;
 }
 
-th, tr {
+th, tr,td {
     background-color: #96D4D4;
+    text-align:center;
+    padding-top:13px;
+    padding-bottom:13px;
 }
-
-th {
-    text-align: center;
-}
-
 td {
     padding-left: 6px;
 }

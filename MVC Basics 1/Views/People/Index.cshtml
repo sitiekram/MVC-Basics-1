@@ -3,43 +3,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-@*@using (Html.BeginForm())
-    {
-        <p>
-            @Html.LabelFor(m => m.CreatePerson.FirstName)
-            @Html.TextAreaFor(m => m.CreatePerson.FirstName)
-            @Html.ValidationMessageFor(m => m.CreatePerson.FirstName)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.CreatePerson.LastName)
-            @Html.TextAreaFor(m => m.CreatePerson.LastName)
-            @Html.ValidationMessageFor(m => m.CreatePerson.LastName)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.CreatePerson.City)
-            @Html.TextAreaFor(m => m.CreatePerson.City)
-            @Html.ValidationMessageFor(m => m.CreatePerson.City)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.CreatePerson.PhoneNumber)
-            @Html.TextAreaFor(m => m.CreatePerson.PhoneNumber)
-            @Html.ValidationMessageFor(m => m.CreatePerson.PhoneNumber)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.CreatePerson.Email)
-            @Html.TextAreaFor(m => m.CreatePerson.Email)
-            @Html.ValidationMessageFor(m => m.CreatePerson.Email)
-        </p>
-        <p><input type="submit" value="Save Data" /></p>
-    }*@
 <div>
     <form asp-action="Index" method="post" role="form">
         @Html.AntiForgeryToken()
         <div>
-            <h3>Filter</h3>
+            <h4>Filter</h4>
             <label asp-for="FilterString" value="Filter String"></label>
-            <input asp-for="FilterString" required/>
+            <input asp-for="FilterString"/>
             <input type="submit"class="btn btn-primary" value="Search" />
         </div>
 
@@ -68,7 +38,8 @@
         </div>
     </form>
 </div>
-<h4>List of person</h4>
+<br />
+<h2><b>List of person</b></h2>
 <table>
     <tr>
         <th>Full Name</th>
@@ -79,14 +50,15 @@
     </tr>
     @foreach (var person in Model.PersonList)
     {
-        <tr>
-            <td>@person.FullName</td>
-            <td>@person.City</td>
-            <td>@person.PhoneNumber</td>
-            <td>@person.Email</td>
-            <td><a href="#" onclick="location.href =
-                    '@Url.Action("DeletePerson","People", new { id=person.PersonId })'">Delete</a></td>
-        </tr>
+<tr>
+    <td>@person.FullName</td>
+    <td>@person.City</td>
+    <td>@person.PhoneNumber</td>
+    <td>@person.Email</td>
+    <td>
+        <a href="#" onclick="location.href ='@Url.Action("DeletePerson", "People" , new { id=person.PersonId })'">Delete</a>
+    </td>
+</tr>
     }
 </table>
 
