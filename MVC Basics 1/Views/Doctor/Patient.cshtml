@@ -10,7 +10,9 @@
     <p>@ViewBag.Message</p>
  }
 <form asp-controller="Doctor" asp-action="Patient" method="post">
-    <label>Temperature in celicus : </label>
+    <label>Name : </label>
+    <input type="text" name="name" />
+     <label>Temperature in celicus : </label>
     <input type="number" name="temperature" />
     <input type="submit"  value="Submit" />
 </form>
