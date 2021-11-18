@@ -65,6 +65,27 @@ body {
     margin-bottom: 60px;
 }
 
+table, th, tr, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+
+th, tr {
+    background-color: #96D4D4;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    padding-left: 6px;
+}
+
+table {
+    width: 60%;
+}
+
 .footer {
     position: absolute;
     bottom: 0;

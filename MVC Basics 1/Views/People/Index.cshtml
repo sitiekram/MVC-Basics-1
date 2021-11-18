@@ -1,0 +1,60 @@
+﻿@model MVC_Basics_1.Models.PeopleViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+@*@using (Html.BeginForm())
+    {
+        <p>
+            @Html.LabelFor(m => m.CreatePerson.FirstName)
+            @Html.TextAreaFor(m => m.CreatePerson.FirstName)
+            @Html.ValidationMessageFor(m => m.CreatePerson.FirstName)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.CreatePerson.LastName)
+            @Html.TextAreaFor(m => m.CreatePerson.LastName)
+            @Html.ValidationMessageFor(m => m.CreatePerson.LastName)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.CreatePerson.City)
+            @Html.TextAreaFor(m => m.CreatePerson.City)
+            @Html.ValidationMessageFor(m => m.CreatePerson.City)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.CreatePerson.PhoneNumber)
+            @Html.TextAreaFor(m => m.CreatePerson.PhoneNumber)
+            @Html.ValidationMessageFor(m => m.CreatePerson.PhoneNumber)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.CreatePerson.Email)
+            @Html.TextAreaFor(m => m.CreatePerson.Email)
+            @Html.ValidationMessageFor(m => m.CreatePerson.Email)
+        </p>
+        <p><input type="submit" value="Save Data" /></p>
+    }*@
+<!--<form asp-controller="People" asp-action="Index" method="post">
+<label asp-for="CreatePerson.FirstName"></label>
+<input asp-for="CreatePerson.FirstName" />
+</form>-->
+<h4>List of person</h4>
+<table>
+    <tr>
+        <th>Full Name</th>
+        <th>City</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var person in Model.PersonList)
+    {
+        <tr>
+            <td>@person.FullName</td>
+            <td>@person.City</td>
+            <td>@person.PhoneNumber</td>
+            <td>@person.Email</td>
+            <td><a href="">Delete</a></td>
+        </tr>
+    }
+</table>
+
