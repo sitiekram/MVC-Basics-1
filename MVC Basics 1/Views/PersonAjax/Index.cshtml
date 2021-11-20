@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<div>
+    <h2>@ViewBag.Title</h2>
+
+    <div>
+        <h2>People with JQuery and AJax functions</h2>
+        <div id="errorMessages"></div>
+
+        <input type="button" class="btn btn-primary" value="Get all people" onclick="getAllPeople()" />
+        <label for="PersonIdInputLable">Person ID</label>
+        <input id="PersonIdInput" type="number" />
+
+        <input type="button" class="btn btn-primary" onclick="getPersonByID()" value="DetailsForPeople" />
+        <input type="button" class="btn btn-primary" onclick="deletePersonByID()" value="Delete" />
+    </div>
+    <br />
+    <br />
+    <div id="PersonList"></div>
+</div>
