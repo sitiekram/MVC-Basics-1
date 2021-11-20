@@ -39,25 +39,30 @@
 </div>
 <br />
 <h2><b>List of person</b></h2>
-<table>
-    <tr>
-        <th>Full Name</th>
-        <th>City</th>
-        <th>Phone Number</th>
-        <th>Email</th>
-        <th>Action</th>
-    </tr>
+<div class="container" style="font-size: 20px; background-color: #96D4D4">
+    <div class="row" style="font-weight:bold;font-size:25px">
+        <div class="col">
+            Person ID
+        </div>
+        <div class="col">
+            Full Name
+        </div>
+        <div class="col">
+            City
+        </div>
+        <div class="col">
+            Phone Number
+        </div>
+        <div class="col">
+            Email
+        </div>
+        <div class="col">
+            Action
+        </div>
+    </div>
     @foreach (var person in Model.PersonList)
     {
-<tr>
-    <td>@person.FullName</td>
-    <td>@person.City</td>
-    <td>@person.PhoneNumber</td>
-    <td>@person.Email</td>
-    <td>
-        <a href="#" onclick="location.href ='@Url.Action("DeletePerson", "People" , new { id=person.PersonId })'">Delete</a>
-    </td>
-</tr>
+        <partial name="_PersonPartial" model="person" />
     }
-</table>
+</div>
 
