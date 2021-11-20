@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Person
+
+<div class="row">
+    <div class="col">
+        @Model.PersonId
+    </div>
+    <div class="col">
+        @Model.FullName
+    </div>
+    <div class="col">
+        @Model.City
+    </div>
+    <div class="col">
+        @Model.PhoneNumber
+    </div>
+    <div class="col">
+        @Model.Email
+    </div>
+    <div class="col">
+        <a href="#" onclick="location.href ='@Url.Action("DeletePerson", "People", new { id = Model.PersonId })'">Delete</a>
+    </div>
+</div>
