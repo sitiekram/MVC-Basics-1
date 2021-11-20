@@ -62,20 +62,11 @@ namespace MVC_Basics_1.Controllers
             ViewBag.Message = "Failed to add person";
             return View("Index",peopleView);
         }
-        [HttpPost]
         public IActionResult DeletePerson(int id)
         {
             PeopleViewModel peopleView = new PeopleViewModel();
             Person DeletePerson = peopleView.Read(id);
             bool status=peopleView.Delete(DeletePerson);
-            if (status)
-            {
-                ViewBag.Message = "Successfully deleted person!";
-            }
-            else
-            {
-                ViewBag.Message = "Failed to delete the person";
-            }
             return RedirectToAction("Index");
         }
     }
