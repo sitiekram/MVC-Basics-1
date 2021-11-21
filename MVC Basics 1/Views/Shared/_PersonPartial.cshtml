@@ -4,22 +4,22 @@
 @model Person
 
 <div class="row">
-    <div class="col">
+    <div class="col-1">
         @Model.PersonId
     </div>
-    <div class="col">
+    <div class="col-3">
         @Model.FullName
     </div>
-    <div class="col">
+    <div class="col-2">
         @Model.City
     </div>
-    <div class="col">
+    <div class="col-2">
         @Model.PhoneNumber
     </div>
-    <div class="col">
+    <div class="col-3">
         @Model.Email
     </div>
-    <div class="col">
+    <div class="col-1">
         <a href="#" onclick="location.href ='@Url.Action("DeletePerson", "People", new { id = Model.PersonId })'">Delete</a>
     </div>
 </div>
