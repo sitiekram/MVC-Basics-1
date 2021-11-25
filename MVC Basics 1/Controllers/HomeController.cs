@@ -26,19 +26,5 @@ namespace MVC_Basics_1.Controllers
         {
             return View();
         }
-        public IActionResult Guess()
-        {
-            GuessModel gs = new GuessModel(this);
-            gs.SetRandomNumber();
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Guess(int number)
-        { 
-            GuessModel gs = new GuessModel(this);
-            gs.GetRandomNumber();
-            ViewBag.Message = gs.GuessNumber(number);
-            return View();
-        }
     }
 }
