@@ -9,13 +9,13 @@ namespace MVC_Basics_1.Models
 {
     public class GuessModel
     {
-        private HomeController aController;
+        private GuessController aController;
         private Random rnd;
         public int GuessedNumber { get; set; }
         public int RandomNumber { get; set; }
         private static int counter = 0;
        
-        public GuessModel(HomeController aController)
+        public GuessModel(GuessController aController)
         {
              this.aController = aController;
              rnd = new Random();
