@@ -16,20 +16,19 @@ namespace MVC_Basics_1.Controllers
         [HttpGet]
         public IActionResult GetPeople()
         {
-            PeopleViewModel peopleView = new PeopleViewModel();
-            peopleView.PersonList = peopleView.Read();
-            if (peopleView.PersonList.Count == 0 || peopleView.PersonList == null)
+            PeopleMemory peopleMemory = new PeopleMemory();
+            List<Person> personList = peopleMemory.Read();
+            if (personList.Count == 0 || personList == null)
             {
-                peopleView.SeedPeople();
+                peopleMemory.SeedPeople();
             }
-            List<Person> personList = peopleView.Read();
             return PartialView("_AjaxPersonPartial", personList);
         }
         [HttpPost]
         public IActionResult FindPersonById(int personID)
         {
-            PeopleViewModel peopleView = new PeopleViewModel();
-            Person targetPerson = peopleView.Read(personID);
+            PeopleMemory peopleMemory = new PeopleMemory();
+            Person targetPerson = peopleMemory.Read(personID);
             List<Person> personList = new List<Person>();
             if (targetPerson != null)
             {
@@ -40,12 +39,12 @@ namespace MVC_Basics_1.Controllers
         [HttpPost]
         public IActionResult DeletePersonById(int personID)
         {
-            PeopleViewModel peopleView = new PeopleViewModel();
+            PeopleMemory peopleMemory = new PeopleMemory();
             bool status = false;
-            Person targetPerson = peopleView.Read(personID);
+            Person targetPerson = peopleMemory.Read(personID);
             if (targetPerson != null)
             {
-                status = peopleView.Delete(targetPerson);
+                status = peopleMemory.Delete(targetPerson);
             }
             if (status)
             {
