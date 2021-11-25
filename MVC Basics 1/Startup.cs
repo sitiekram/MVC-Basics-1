@@ -59,7 +59,7 @@ namespace MVC_Basics_1
                 endpoints.MapControllerRoute(
                     name: "Guess",
                     pattern: "GuessingGame",
-                    defaults: new { controller = "Home", action = "Guess" });
+                    defaults: new { controller = "Guess", action = "Index" });
             });
         }
     }
