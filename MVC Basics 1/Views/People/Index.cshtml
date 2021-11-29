@@ -4,14 +4,22 @@
 }
 
 <div>
-    <form asp-action="Index" method="post" role="form">
+    <form asp-action="Index" method="post" role="form" class="form">
         @Html.AntiForgeryToken()
-        <div>
             <h4>Filter</h4>
-            <label asp-for="FilterString"></label>
-            <input asp-for="FilterString"/>
-            <input type="submit"class="btn btn-primary" value="Search" />
-        </div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="FilterString"></label>
+                </div>
+                <div class="col-9">
+                    <input asp-for="FilterString" />
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="submit" class="btn btn-primary btn-lg" value="Search" />
+                </div>
+            </div>
     </form>
 </div>
 <div>
