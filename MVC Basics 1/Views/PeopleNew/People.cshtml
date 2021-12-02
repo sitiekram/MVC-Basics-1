@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PeopleModel>
+@{ 
+    ViewData["Tiltle"] = "People";
+}
+<h1><b>List of person</b></h1>
+
+<a asp-action="CreatePerson">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>City</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.FullName</td>
+                <td>@person.City</td>
+                <td>@person.PhoneNumber</td>
+                <td>@person.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

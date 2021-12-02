@@ -7,8 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using MVC_Basics_1.Models;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.Extensions.Configuration;
+using MVC_Basics_1.Data;
 
 namespace MVC_Basics_1
 {
@@ -16,6 +20,11 @@ namespace MVC_Basics_1
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+       public IConfiguration Configuration { get; set; }
+       
+       public Startup(IConfiguration configuration)
+        { Configuration = configuration; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDistributedMemoryCache();
@@ -27,6 +36,8 @@ namespace MVC_Basics_1
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
         }
