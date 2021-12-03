@@ -3,14 +3,16 @@ using MVC_Basics_1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVC_Basics_1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211202165635_Create relationship between City and Country")]
+    partial class CreaterelationshipbetweenCityandCountry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +32,11 @@ namespace MVC_Basics_1.Migrations
                         .HasColumnType("nvarchar(3)")
                         .HasMaxLength(3);
 
+                    b.Property<string>("District")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
@@ -43,50 +50,6 @@ namespace MVC_Basics_1.Migrations
                     b.HasIndex("CountryCode");
 
                     b.ToTable("Cities");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            CountryCode = "SWE",
-                            Name = "Vänersborg",
-                            Population = 39606
-                        },
-                        new
-                        {
-                            ID = 2,
-                            CountryCode = "SWE",
-                            Name = "Göteborg",
-                            Population = 1060000
-                        },
-                        new
-                        {
-                            ID = 3,
-                            CountryCode = "SWE",
-                            Name = "Stockholm",
-                            Population = 1657000
-                        },
-                        new
-                        {
-                            ID = 4,
-                            CountryCode = "SWE",
-                            Name = "Trollhättan",
-                            Population = 54487
-                        },
-                        new
-                        {
-                            ID = 5,
-                            CountryCode = "GBR",
-                            Name = "London",
-                            Population = 961989
-                        },
-                        new
-                        {
-                            ID = 6,
-                            CountryCode = "USA",
-                            Name = "Washington D.C.",
-                            Population = 689545
-                        });
                 });
 
             modelBuilder.Entity("MVC_Basics_1.Models.CountryModel", b =>
@@ -99,6 +62,10 @@ namespace MVC_Basics_1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("HeadOfState")
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
@@ -106,6 +73,14 @@ namespace MVC_Basics_1.Migrations
 
                     b.Property<int>("Population")
                         .HasColumnType("int");
+
+                    b.Property<string>("Region")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<double>("SurfaceArea")
+                        .HasColumnType("float");
 
                     b.HasKey("Code");
 
@@ -116,29 +91,11 @@ namespace MVC_Basics_1.Migrations
                         {
                             Code = "GHA",
                             Continent = "Africa",
+                            HeadOfState = "John Kufuor",
                             Name = "Ghana",
-                            Population = 20212000
-                        },
-                        new
-                        {
-                            Code = "GBR",
-                            Continent = "Europe",
-                            Name = "United Kingdom",
-                            Population = 59623400
-                        },
-                        new
-                        {
-                            Code = "SWE",
-                            Continent = "Europe",
-                            Name = "Sweden",
-                            Population = 10188382
-                        },
-                        new
-                        {
-                            Code = "USA",
-                            Continent = "North America",
-                            Name = "United States",
-                            Population = 278357000
+                            Population = 20212000,
+                            Region = "Western Africa",
+                            SurfaceArea = 238533.0
                         });
                 });
 
@@ -149,8 +106,10 @@ namespace MVC_Basics_1.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CityID")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -167,15 +126,13 @@ namespace MVC_Basics_1.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.HasIndex("CityID");
-
                     b.ToTable("People");
 
                     b.HasData(
                         new
                         {
                             PersonId = 1,
-                            CityID = 1,
+                            City = "Vänersborg",
                             Email = "ekram234@gmail.com",
                             FullName = "Ekram Ahmedin",
                             PhoneNumber = "0791234567"
@@ -183,7 +140,7 @@ namespace MVC_Basics_1.Migrations
                         new
                         {
                             PersonId = 2,
-                            CityID = 2,
+                            City = "Göteborg",
                             Email = "timsnds241@gmail.com",
                             FullName = "Eve Andersson",
                             PhoneNumber = "+46701297530"
@@ -191,7 +148,7 @@ namespace MVC_Basics_1.Migrations
                         new
                         {
                             PersonId = 3,
-                            CityID = 1,
+                            City = "Vänersborg",
                             Email = "ulf78s3@hotmail.com",
                             FullName = "Ulf David",
                             PhoneNumber = "0752875207"
@@ -199,7 +156,7 @@ namespace MVC_Basics_1.Migrations
                         new
                         {
                             PersonId = 4,
-                            CityID = 4,
+                            City = "Trollhättan",
                             Email = "alimuhammed@gmail.com",
                             FullName = "Ali Muhammed",
                             PhoneNumber = "0796078542"
@@ -207,7 +164,7 @@ namespace MVC_Basics_1.Migrations
                         new
                         {
                             PersonId = 5,
-                            CityID = 3,
+                            City = "Stockholm",
                             Email = "mariaSvensson234@gmail.com",
                             FullName = "Maria Svensson",
                             PhoneNumber = "+46791028376"
@@ -215,7 +172,7 @@ namespace MVC_Basics_1.Migrations
                         new
                         {
                             PersonId = 6,
-                            CityID = 3,
+                            City = "Stockholm",
                             Email = "RahwaSuliman1234@gmail.com",
                             FullName = "Rahwa Suliman",
                             PhoneNumber = "0764933276"
@@ -227,15 +184,6 @@ namespace MVC_Basics_1.Migrations
                     b.HasOne("MVC_Basics_1.Models.CountryModel", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MVC_Basics_1.Models.PeopleModel", b =>
-                {
-                    b.HasOne("MVC_Basics_1.Models.CityModel", "City")
-                        .WithMany("People")
-                        .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

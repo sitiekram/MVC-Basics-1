@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CityModel> 
+@{
+    ViewData["Title"] = "Cities";
+}
+
+<h1><b>List of Cities</b></h1>
+
+<a asp-action="CreateCity">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>City ID</th>
+            <th>City Name</th>
+            <th>Country Code</th>
+            <th>Population</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var city in Model)
+        {
+            <tr>
+                <td>@city.ID</td>
+                <td>@city.Name</td>
+                <td>@city.CountryCode</td>
+                <td>@city.Population</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -18,9 +18,6 @@ namespace MVC_Basics_1.Models
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
-        [Required]
-        [MaxLength(15)]
-        public string City { get; set; }
 
         [Required(ErrorMessage = "Phone number is mandatory")]
         [Display(Name = "Phone Number")]
@@ -30,5 +27,9 @@ namespace MVC_Basics_1.Models
         [Required(ErrorMessage = "Please enter email.")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Email Format semms to be wrong")]
         public string Email { get; set; }
+
+        [Required]
+        public int CityID { get;set;}
+        public CityModel City { get; set; }
     }
 }

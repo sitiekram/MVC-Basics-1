@@ -13,6 +13,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211203064926_Concluding One to Many.cs" />
+    <Compile Remove="Migrations\20211203064926_Concluding One to Many.Designer.cs" />
+    <Compile Remove="Migrations\20211203070510_Concluding One to Many.cs" />
+    <Compile Remove="Migrations\20211203070510_Concluding One to Many.Designer.cs" />
+    <Compile Remove="Migrations\20211203070744_Concluding One to Many.cs" />
+    <Compile Remove="Migrations\20211203070744_Concluding One to Many.Designer.cs" />
+    <Compile Remove="Migrations\20211203071541_Concluding One to Many.cs" />
+    <Compile Remove="Migrations\20211203071541_Concluding One to Many.Designer.cs" />
+    <Compile Remove="Migrations\20211203072632_Concluding One to Many.cs" />
+    <Compile Remove="Migrations\20211203072632_Concluding One to Many.Designer.cs" />
+    <Compile Remove="Migrations\20211203085050_Create relationship between city and peole.cs" />
+    <Compile Remove="Migrations\20211203085050_Create relationship between city and peole.Designer.cs" />
+    <Compile Remove="Migrations\20211203085308_Create relationship between city and peole.cs" />
+    <Compile Remove="Migrations\20211203085308_Create relationship between city and peole.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">
