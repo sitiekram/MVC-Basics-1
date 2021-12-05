@@ -29,6 +29,11 @@ namespace MVC_Basics_1.Controllers
 
         public IActionResult CreateCity()
         {
+            ViewBag.CountryCode = _context.Countries.Select(a => new SelectListItem
+            {
+                Text = a.Code, 
+                Value = a.Code 
+            }).ToList();
             return View();
         }
         [HttpPost]
@@ -36,7 +41,6 @@ namespace MVC_Basics_1.Controllers
         {
             if(ModelState.IsValid)
             {
-                ViewBag.CountryCode = new SelectList(_context.Countries.ToList());
                 _context.Cities.Add(city);
                 _context.SaveChanges();
                 return RedirectToAction("Cities");

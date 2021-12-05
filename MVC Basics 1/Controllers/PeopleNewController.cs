@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC_Basics_1.Data;
 using MVC_Basics_1.Models;
 using System;
@@ -28,6 +29,11 @@ namespace MVC_Basics_1.Controllers
         }
         public IActionResult CreatePerson()
         {
+            ViewBag.CityID = _context.Cities.Select(a => new SelectListItem
+            {
+                Text = (a.ID).ToString(),
+                Value = (a.ID).ToString()
+            }).ToList();
             return View();
         }
         [HttpPost]
