@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC_Basics_1.Data;
 using MVC_Basics_1.Models;
 using System;
@@ -28,6 +29,11 @@ namespace MVC_Basics_1.Controllers
 
         public IActionResult CreateCity()
         {
+            ViewBag.CountryCode = _context.Countries.Select(a => new SelectListItem
+            {
+                Text = a.Code,
+                Value = a.Code
+            }).ToList();
             return View();
         }
         [HttpPost]
