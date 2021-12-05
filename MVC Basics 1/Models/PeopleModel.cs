@@ -31,5 +31,8 @@ namespace MVC_Basics_1.Models
         [Required]
         public int CityID { get;set;}
         public CityModel City { get; set; }
+
+        public List<People_LanguageModel> PeopleLanguages { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC_Basics_1.Data;
 using MVC_Basics_1.Models;
 using System;
@@ -35,6 +36,7 @@ namespace MVC_Basics_1.Controllers
         {
             if(ModelState.IsValid)
             {
+                ViewBag.CountryCode = new SelectList(_context.Countries.ToList());
                 _context.Cities.Add(city);
                 _context.SaveChanges();
                 return RedirectToAction("Cities");

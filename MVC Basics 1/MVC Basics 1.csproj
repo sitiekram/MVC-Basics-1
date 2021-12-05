@@ -27,6 +27,10 @@
     <Compile Remove="Migrations\20211203085050_Create relationship between city and peole.Designer.cs" />
     <Compile Remove="Migrations\20211203085308_Create relationship between city and peole.cs" />
     <Compile Remove="Migrations\20211203085308_Create relationship between city and peole.Designer.cs" />
+    <Compile Remove="Migrations\20211204202843_Seed more data.cs" />
+    <Compile Remove="Migrations\20211204202843_Seed more data.Designer.cs" />
+    <Compile Remove="Migrations\20211204211049_Seed more data.cs" />
+    <Compile Remove="Migrations\20211204211049_Seed more data.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

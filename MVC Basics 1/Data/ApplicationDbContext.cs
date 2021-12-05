@@ -15,6 +15,8 @@ namespace MVC_Basics_1.Data
         public DbSet<PeopleModel> People { get; set; }
         public DbSet<CountryModel> Countries { get; set; }
         public DbSet<CityModel> Cities { get; set; }
+        public DbSet<LanguageModel> Languages { get; set; }
+        public DbSet<People_LanguageModel> PeopleLanguages { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -27,6 +29,18 @@ namespace MVC_Basics_1.Data
                 .HasOne<CityModel>(ci => ci.City)
                 .WithMany(p => p.People)
                 .HasForeignKey(ci => ci.CityID).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<People_LanguageModel>().HasKey(co => new { co.PersonId, co.LanguageID });
+
+            modelBuilder.Entity<People_LanguageModel>()
+                .HasOne(p => p.People)
+                .WithMany(l => l.PeopleLanguages)
+                .HasForeignKey(p => p.PersonId).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<People_LanguageModel>()
+                .HasOne(l => l.Language)
+                .WithMany(p => p.PeopleLanguages)
+                .HasForeignKey(l => l.LanguageID).OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CountryModel>().HasData(new CountryModel { Code = "GHA", Name = "Ghana", Continent = "Africa", Population = 20212000 });
             modelBuilder.Entity<CountryModel>().HasData(new CountryModel { Code = "GBR", Name = "United Kingdom", Continent = "Europe", Population = 59623400 });
@@ -88,7 +102,19 @@ namespace MVC_Basics_1.Data
                 PhoneNumber = "0764933276",
                 Email = "RahwaSuliman1234@gmail.com"
             });
-            
+
+            modelBuilder.Entity<LanguageModel>().HasData(new LanguageModel {LanguageID = 1, Name = "English" , Description = "The international language spoken by many people around the world"});
+            modelBuilder.Entity<LanguageModel>().HasData(new LanguageModel { LanguageID = 2, Name = "Arabic", Description = "The  second international language spoken by in the different region of the world" });
+            modelBuilder.Entity<LanguageModel>().HasData(new LanguageModel { LanguageID = 3, Name = "Swedish", Description = "The main language spoken in the Sweden Country" });
+
+            modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel {PersonId = 1 , LanguageID =3} );
+            modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel { PersonId = 1, LanguageID = 2 });
+            modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel { PersonId = 1, LanguageID = 1 });
+            modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel { PersonId = 2, LanguageID = 3 });
+            modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel { PersonId = 2, LanguageID = 1 });
+            modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel { PersonId = 3, LanguageID = 3 });
+            modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel { PersonId = 4, LanguageID = 2 });
+
 
         }
     }

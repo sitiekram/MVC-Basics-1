@@ -3,14 +3,16 @@ using MVC_Basics_1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVC_Basics_1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211204064942_Many to many relationship")]
+    partial class Manytomanyrelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,8 +152,8 @@ namespace MVC_Basics_1.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -161,26 +163,6 @@ namespace MVC_Basics_1.Migrations
                     b.HasKey("LanguageID");
 
                     b.ToTable("Languages");
-
-                    b.HasData(
-                        new
-                        {
-                            LanguageID = 1,
-                            Description = "The international language spoken by many people around the world",
-                            Name = "English"
-                        },
-                        new
-                        {
-                            LanguageID = 2,
-                            Description = "The  second international language spoken by in the different region of the world",
-                            Name = "Arabic"
-                        },
-                        new
-                        {
-                            LanguageID = 3,
-                            Description = "The main language spoken in the Sweden Country",
-                            Name = "Swedish"
-                        });
                 });
 
             modelBuilder.Entity("MVC_Basics_1.Models.PeopleModel", b =>
@@ -276,43 +258,6 @@ namespace MVC_Basics_1.Migrations
                     b.HasIndex("LanguageID");
 
                     b.ToTable("PeopleLanguages");
-
-                    b.HasData(
-                        new
-                        {
-                            PersonId = 1,
-                            LanguageID = 3
-                        },
-                        new
-                        {
-                            PersonId = 1,
-                            LanguageID = 2
-                        },
-                        new
-                        {
-                            PersonId = 1,
-                            LanguageID = 1
-                        },
-                        new
-                        {
-                            PersonId = 2,
-                            LanguageID = 3
-                        },
-                        new
-                        {
-                            PersonId = 2,
-                            LanguageID = 1
-                        },
-                        new
-                        {
-                            PersonId = 3,
-                            LanguageID = 3
-                        },
-                        new
-                        {
-                            PersonId = 4,
-                            LanguageID = 2
-                        });
                 });
 
             modelBuilder.Entity("MVC_Basics_1.Models.CityModel", b =>

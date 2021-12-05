@@ -1,0 +1,32 @@
+﻿@model IEnumerable<People_LanguageModel>
+@{
+    ViewData["Title"] = "ListAllLanguagesAndPeople";
+}
+
+<h2>ListAllLanguagesAndPeople</h2>
+
+
+<table class="table" style="max-width:400px">
+    <thead>
+        <tr>
+            <th>
+                Person ID
+            </th>
+            <th>
+                Language ID
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @item.PersonId
+    </td>
+    <td>
+        @item.LanguageID
+    </td>
+</tr>}
+    </tbody>
+</table>
