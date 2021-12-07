@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Basics_1.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         { 
