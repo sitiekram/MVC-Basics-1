@@ -31,6 +31,10 @@
     <Compile Remove="Migrations\20211204202843_Seed more data.Designer.cs" />
     <Compile Remove="Migrations\20211204211049_Seed more data.cs" />
     <Compile Remove="Migrations\20211204211049_Seed more data.Designer.cs" />
+    <Compile Remove="Migrations\20211207170934_role created.cs" />
+    <Compile Remove="Migrations\20211207170934_role created.Designer.cs" />
+    <Compile Remove="Migrations\20211209090226_Analyzing.cs" />
+    <Compile Remove="Migrations\20211209090226_Analyzing.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MVC_Basics_1.Data;
 using MVC_Basics_1.Models;
 using System;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MVC_Basics_1.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CityController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -46,6 +49,53 @@ namespace MVC_Basics_1.Controllers
                 return RedirectToAction("Cities");
             }
             return View();
+        }
+        public IActionResult EditCity(int cityid)
+        {
+           var CityData = _context.Cities.Where(x => x.ID == cityid).FirstOrDefault();
+            if(CityData != null)
+            {
+                ViewBag.CountryCode = _context.Countries.Select(a => new SelectListItem
+                {
+                    Text = a.Code,
+                    Value = a.Code
+                }).ToList();
+                TempData["CityID"] = cityid;
+                TempData.Keep();
+                return View(CityData);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditCity(CityModel city)
+        {
+            int cityID = (int)TempData["CityID"];
+            var CityData = _context.Cities.Where(x => x.ID == cityID).FirstOrDefault();
+
+            if(CityData != null)
+            {
+                CityData.Name = city.Name;
+                CityData.CountryCode = city.CountryCode;
+                CityData.Population = city.Population;
+                _context.Entry(CityData).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Cities");
+        }
+
+        public IActionResult DeleteCity(int cityid)
+        {
+            if(cityid > 0)
+            {
+                var citybyid = _context.Cities.Where(x => x.ID == cityid).FirstOrDefault();
+                if(citybyid != null)
+                {
+                    _context.Entry(citybyid).State = EntityState.Deleted;
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Cities");
         }
 
     }

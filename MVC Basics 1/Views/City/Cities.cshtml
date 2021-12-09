@@ -14,17 +14,19 @@
             <th>City Name</th>
             <th>Country Code</th>
             <th>Population</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var city in Model)
         {
-            <tr>
-                <td>@city.ID</td>
-                <td>@city.Name</td>
-                <td>@city.CountryCode</td>
-                <td>@city.Population</td>
-            </tr>
+        <tr>
+            <td>@city.ID</td>
+            <td>@city.Name</td>
+            <td>@city.CountryCode</td>
+            <td>@city.Population</td>
+            <td> @Html.ActionLink("Edit", "EditCity", new { cityid = @city.ID }) | @Html.ActionLink("Delete", "DeleteCity", new { cityid = @city.ID }) </td>
+        </tr>
         }
     </tbody>
 </table>

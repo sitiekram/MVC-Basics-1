@@ -27,6 +27,9 @@ namespace MVC_Basics_1.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -37,6 +40,14 @@ namespace MVC_Basics_1.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -82,6 +93,27 @@ namespace MVC_Basics_1.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f993d9f3-9190-4c36-966d-de8d2b8c2227",
+                            AccessFailedCount = 0,
+                            BirthDate = new DateTime(1991, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "41853483-4143-495f-8cf8-1e4df6c25e0d",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "Adminsson",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGcYIU1CHhhos5cp5H48t//4to50aehdhQ3fu939f7Ha5RH47DFzcKbeuRdkzscrYw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c640b149-f1dd-47cf-bebb-b782d86fdb17",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("MVC_Basics_1.Models.CityModel", b =>
@@ -329,6 +361,58 @@ namespace MVC_Basics_1.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MVC_Basics_1.Models.People_LanguageModel", b =>
+                {
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LanguageID")
+                        .HasColumnType("int");
+
+                    b.HasKey("PersonId", "LanguageID");
+
+                    b.HasIndex("LanguageID");
+
+                    b.ToTable("PeopleLanguages");
+
+                    b.HasData(
+                        new
+                        {
+                            PersonId = 1,
+                            LanguageID = 3
+                        },
+                        new
+                        {
+                            PersonId = 1,
+                            LanguageID = 2
+                        },
+                        new
+                        {
+                            PersonId = 1,
+                            LanguageID = 1
+                        },
+                        new
+                        {
+                            PersonId = 2,
+                            LanguageID = 3
+                        },
+                        new
+                        {
+                            PersonId = 2,
+                            LanguageID = 1
+                        },
+                        new
+                        {
+                            PersonId = 3,
+                            LanguageID = 3
+                        },
+                        new
+                        {
+                            PersonId = 4,
+                            LanguageID = 2
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -354,6 +438,22 @@ namespace MVC_Basics_1.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "87c1914a-0645-4c61-bc78-925737749ddd",
+                            ConcurrencyStamp = "142fcecb-fde1-40fc-a564-502675fd1ca4",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "6aea93fa-4c21-4ac2-83af-6e53787a194a",
+                            ConcurrencyStamp = "1824bd35-aaf7-47d5-b462-f537d41121c4",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -439,6 +539,13 @@ namespace MVC_Basics_1.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "f993d9f3-9190-4c36-966d-de8d2b8c2227",
+                            RoleId = "87c1914a-0645-4c61-bc78-925737749ddd"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -458,58 +565,6 @@ namespace MVC_Basics_1.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("MVC_Basics_1.Models.People_LanguageModel", b =>
-                {
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LanguageID")
-                        .HasColumnType("int");
-
-                    b.HasKey("PersonId", "LanguageID");
-
-                    b.HasIndex("LanguageID");
-
-                    b.ToTable("PeopleLanguages");
-
-                    b.HasData(
-                        new
-                        {
-                            PersonId = 1,
-                            LanguageID = 3
-                        },
-                        new
-                        {
-                            PersonId = 1,
-                            LanguageID = 2
-                        },
-                        new
-                        {
-                            PersonId = 1,
-                            LanguageID = 1
-                        },
-                        new
-                        {
-                            PersonId = 2,
-                            LanguageID = 3
-                        },
-                        new
-                        {
-                            PersonId = 2,
-                            LanguageID = 1
-                        },
-                        new
-                        {
-                            PersonId = 3,
-                            LanguageID = 3
-                        },
-                        new
-                        {
-                            PersonId = 4,
-                            LanguageID = 2
-                        });
                 });
 
             modelBuilder.Entity("MVC_Basics_1.Models.CityModel", b =>
@@ -541,6 +596,57 @@ namespace MVC_Basics_1.Migrations
                     b.HasOne("MVC_Basics_1.Models.PeopleModel", "People")
                         .WithMany("PeopleLanguages")
                         .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("MVC_Basics_1.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("MVC_Basics_1.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC_Basics_1.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("MVC_Basics_1.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

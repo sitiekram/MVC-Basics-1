@@ -13,17 +13,19 @@
             <th>City</th>
             <th>Phone Number</th>
             <th>Email</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var person in Model)
         {
-            <tr>
-                <td>@person.FullName</td>
-                <td>@person.CityID</td>
-                <td>@person.PhoneNumber</td>
-                <td>@person.Email</td>
-            </tr>
+        <tr>
+            <td>@person.FullName</td>
+            <td>@person.CityID</td>
+            <td>@person.PhoneNumber</td>
+            <td>@person.Email</td>
+            <td> @Html.ActionLink("Edit", "EditPerson", new { personId = person.PersonId }) | @Html.ActionLink("Delete", "DeletePerson", new { personId = person.PersonId }) </td>
+        </tr>
         }
     </tbody>
 </table>

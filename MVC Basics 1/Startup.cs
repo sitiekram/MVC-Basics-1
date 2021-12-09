@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
 using MVC_Basics_1.Data;
+using Microsoft.AspNetCore.Identity;
+using MVC_Basics_1.Areas.Identity;
 
 namespace MVC_Basics_1
 {
@@ -38,8 +40,15 @@ namespace MVC_Basics_1
 
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
-            services.AddControllersWithViews(); 
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddControllersWithViews();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +63,8 @@ namespace MVC_Basics_1
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -73,6 +84,7 @@ namespace MVC_Basics_1
                     name: "Guess",
                     pattern: "GuessingGame",
                     defaults: new { controller = "Guess", action = "Index" });
+                endpoints.MapRazorPages();
             });
         }
     }

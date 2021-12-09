@@ -13,16 +13,19 @@
             <th>ID</th>
             <th>Language Name</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var language in Model)
         {
-            <tr>
-                <td>@language.LanguageID</td>
-                <td>@language.Name</td>
-                <td>@language.Description</td>
-            </tr>
+        <tr>
+            <td>@language.LanguageID</td>
+            <td>@language.Name</td>
+            <td>@language.Description</td>
+            <td> @Html.ActionLink("Edit", "EditLanguage", new { languageid = language.LanguageID }) | @Html.ActionLink("Delete", "DeleteLanguage", new { languageid = language.LanguageID }) </td>
+
+        </tr>
         }
     </tbody>
 </table>
