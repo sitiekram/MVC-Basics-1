@@ -121,7 +121,7 @@ namespace MVC_Basics_1.Data
             modelBuilder.Entity<People_LanguageModel>().HasData(new People_LanguageModel { PersonId = 4, LanguageID = 2 });
 
             
-             string roleId = Guid.NewGuid().ToString();
+            string roleId = Guid.NewGuid().ToString();
             string userId = Guid.NewGuid().ToString();
             string userRoleId = Guid.NewGuid().ToString();
 
