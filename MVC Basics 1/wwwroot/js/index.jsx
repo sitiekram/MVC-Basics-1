@@ -1,101 +1,99 @@
-﻿const PersonTable = (props) => {
-    const [persons, setPersons] = React.useState(props.persons)
+﻿import Error from "./ReactUtilities/Error.jsx";
 
-    React.useEffect(() => {
-        setPersons(props.persons)
-    }, [props])
+const sortAsc = 1;
+const sortDesc = -1;
 
-    return (
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th className="btn btn-outline-secondary mb-1" onClick={() => { props.sort() }}>Name</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
+class PeopleTableRows extends React.Component {
+    render() {
+        return (
             <tbody>
-                {persons!= ' ' ? (
-                    persons.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td >{item.name}</td>
-                            <td>
-                                <button onClick={() => { props.showDetails(item) }} className="btn btn-primary">Details</button>
-                            </td>
-                        </tr>
-                    ))
-                ) : (
-                    <tr>
-                        <td colSpan={3}>No persons</td>
-                    </tr>
-                )}
+                {
+                    this.props.people.map(
+                        person =>
+                            <tr key={person.PersonId}>
+                                <td>{person.PersonId}</td>
+                                <td>{person.FullName}</td>
+                                <td><button className={"btn btn-outline-primary"} onClick={() => this.props.onPersonDetails(person.PersonId)}>SHOW</button></td>
+                            </tr>
+                    )
+                }
             </tbody>
-        </table>
-    )
+        );
+    }
 }
 
-function App() {
+class PeopleTableHeader extends React.Component {
+    render() {
+        return (
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">FUll Name <button className={"btn btn-outline-dark btn-sm"} onClick={this.props.sortTable}>&#8645;</button></th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+        );
+    }
+}
 
-    const [error, setError] = React.useState(null);
-    const [isLoaded, setIsLoaded] = React.useState(false);
-    const [items, setItems] = React.useState([]);
-    const [cities, setCities] = React.useState([]);
-    const initialFormState = { id: null, name: '', cityName: '', languages: [] };
-    const [currentPerson, setCurrentPerson] = React.useState(initialFormState);
-    const [reRender, setReRender] = React.useState(0);
-    const [sortOrder, setSortOrder] = React.useState("asc");
-
-    const showDetails = (person) => {
-        setCurrentPerson({ id: person.id, name: person.name, cityName: person.cityName, languages: person.languages });
+class PeopleTable extends React.Component {
+    state = {
+        error: null,
+        isLoaded: false,
+        people: [],
+        sortDirection: 0
     }
 
-    function SortPersonList() {
-        if (sortOrder === "asc") {
-            items.sort((first, second) => {
-                return first.name > second.name ? 1 : -1;
-            });
-            setSortOrder("dsc");
-        }
-        else {
-            items.sort((first, second) => {
-                return first.name > second.name ? -1 : 1;
-            });
-            setSortOrder("asc");
-        }
-    }
-
-    React.useEffect(() => {
-        GetPersons();
-    }, [reRender])
-
-    function GetPersons() {
-        fetch("https://localhost:44301/react/getallpersons")
+    componentDidMount() {
+        // Fetch people
+        // Do some cool fetching here
+        fetch("/React/People")
             .then(res => res.json())
             .then(
                 (result) => {
-                    setIsLoaded(true);
-                    setItems(result.reactPersonVMList);
-                    console.log(items);
-                    setCities(result.citiesList);
+                    this.setState({
+                        isLoaded: true,
+                        people: result
+                    })
                 },
                 (error) => {
-                    setIsLoaded(true);
-                    setError(error);
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
                 }
-            )
+            );
     }
-    return (
-        <div className="mt-3">
-            <div className="mt-4">
-                <h2>Person list</h2>
-                <div>
-                    <PersonTable persons={items} showDetails={showDetails} sort={SortPersonList} />
-                </div>
-            </div>
-        </div>
-    )
+
+    sortTable = () => {
+        let sortDirection = sortAsc;
+        let columnToSort = 'FullName';
+
+        if (this.state.sortDirection === sortAsc) {
+            sortDirection = sortDesc;
+        }
+
+        this.state.people.sort((x1, x2) => x1[columnToSort] < x2[columnToSort] ? -1 * sortDirection : sortDirection);
+        this.setState({
+            sortDirection, people: this.state.people
+        });
+    }
+
+    render() {
+        const { error, isLoaded, people, sortDirection } = this.state;
+        if (error) {
+            return <Error message={error.message} />
+        } else if (!isLoaded) {
+            return <div>Loading...</div>
+        } else {
+            return (
+                <table className="table table-striped">
+                    <PeopleTableHeader sortTable={this.sortTable} />
+                    <PeopleTableRows onPersonDetails={this.props.onPersonDetails} people={people} sortOrder={sortDirection} />
+                </table>
+            );
+        }
+    }
 }
-ReactDOM.render(<App />, document.getElementById('content'));
 
-
+export default PeopleTable;

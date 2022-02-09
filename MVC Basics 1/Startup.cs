@@ -15,6 +15,12 @@ using Microsoft.Extensions.Configuration;
 using MVC_Basics_1.Data;
 using Microsoft.AspNetCore.Identity;
 using MVC_Basics_1.Areas.Identity;
+using Microsoft.AspNetCore.Http;
+using JavaScriptEngineSwitcher.V8;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+using React.AspNet;
+using MVC_Basics_1.Models.Interfaces;
+//using MVC_Basics_1.Models.Services;
 
 namespace MVC_Basics_1
 {
@@ -46,9 +52,19 @@ namespace MVC_Basics_1
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            //services.AddScoped<IPersonService, PersonService>();
+            //services.AddScoped<ICityService, CityService>();
+            //services.AddScoped<ILanguageService, LanguageService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = V8JsEngine.EngineName)
+                .AddV8();
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
 
             services.AddRazorPages();
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +76,11 @@ namespace MVC_Basics_1
             }
 
             app.UseHttpsRedirection();
+            app.UseReact(config =>
+            {
+                //config.AddScript("file");
+            }
+           );
             app.UseStaticFiles();
 
             app.UseRouting();

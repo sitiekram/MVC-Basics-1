@@ -25,7 +25,7 @@ namespace MVC_Basics_1.Models
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter email.")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email Format semms to be wrong")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email Format seems to be wrong")]
         public string Email { get; set; }
 
         [Required]
