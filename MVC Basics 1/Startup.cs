@@ -19,8 +19,7 @@ using Microsoft.AspNetCore.Http;
 using JavaScriptEngineSwitcher.V8;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using React.AspNet;
-using MVC_Basics_1.Models.Interfaces;
-//using MVC_Basics_1.Models.Services;
+using Newtonsoft.Json.Converters;
 
 namespace MVC_Basics_1
 {
@@ -51,19 +50,19 @@ namespace MVC_Basics_1
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //services.AddScoped<IPersonService, PersonService>();
-            //services.AddScoped<ICityService, CityService>();
-            //services.AddScoped<ILanguageService, LanguageService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddReact();
             services.AddJsEngineSwitcher(options => options.DefaultEngineName = V8JsEngine.EngineName)
                 .AddV8();
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
-
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.Converters.Add(new StringEnumConverter());
+            });
             services.AddRazorPages();
-            services.AddMvc();
+            //services.AddMvc();
 
         }
 

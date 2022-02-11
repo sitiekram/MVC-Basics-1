@@ -43,7 +43,7 @@ class BackButton extends React.Component {
 class PeopleApp extends React.Component {
     state = {
         route: routes.index,
-        personId: null,
+        personID: null,
         status: null
     }
 
@@ -54,17 +54,17 @@ class PeopleApp extends React.Component {
         })
     }
 
-    personDetails = (id) => {
+    personDetails = (personId) => {
         this.setState({
             route: routes.details,
-            personId: id
+            personID: personId
         });
     }
 
     goToCreatePerson = () => { this.setState({ route: routes.create }) }
 
-    personDelete = (id) => {
-        fetch("/React/DeletePerson/" + id, { method: 'DELETE' })
+    personDelete = (personId) => {
+        fetch("/React/DeletePerson/" + personId, { method: 'DELETE' })
             .then(() => this.setState({ status: 'Delete successful', route: routes.index }));
     }
 
@@ -90,7 +90,7 @@ class PeopleApp extends React.Component {
                     <div>
                         <BackButton onBack={this.back} />
                         <h1>Details on person</h1>
-                        <PersonDetails onPersonDelete={this.personDelete} personId={this.state.personId} />
+                        <PersonDetails onPersonDelete={this.personDelete} personID={this.state.personID} />
                     </div>
                 );
             case routes.create:

@@ -10,10 +10,10 @@ class PeopleTableRows extends React.Component {
                 {
                     this.props.people.map(
                         person =>
-                            <tr key={person.PersonId}>
-                                <td>{person.PersonId}</td>
-                                <td>{person.FullName}</td>
-                                <td><button className={"btn btn-outline-primary"} onClick={() => this.props.onPersonDetails(person.PersonId)}>SHOW</button></td>
+                            <tr key={person.personId}>
+                                <td>{person.personId}</td>
+                                <td>{person.fullName}</td>
+                                <td><button className={"btn btn-outline-primary"} onClick={() => this.props.onPersonDetails(person.personId)}>SHOW</button></td>
                             </tr>
                     )
                 }
@@ -33,7 +33,7 @@ class PeopleTableHeader extends React.Component {
                 </tr>
             </thead>
         );
-    }
+    } 
 }
 
 class PeopleTable extends React.Component {
@@ -45,8 +45,6 @@ class PeopleTable extends React.Component {
     }
 
     componentDidMount() {
-        // Fetch people
-        // Do some cool fetching here
         fetch("/React/People")
             .then(res => res.json())
             .then(
@@ -67,15 +65,18 @@ class PeopleTable extends React.Component {
 
     sortTable = () => {
         let sortDirection = sortAsc;
-        let columnToSort = 'FullName';
+        let columnToSort = 'fullName';
 
         if (this.state.sortDirection === sortAsc) {
             sortDirection = sortDesc;
         }
 
-        this.state.people.sort((x1, x2) => x1[columnToSort] < x2[columnToSort] ? -1 * sortDirection : sortDirection);
+        const sorted = this.state.people.sort((a, b) => b[columnToSort] - a[columnToSort]);
+
+        //this.state.people.sort((x1, x2) => x1[columnToSort] < x2[columnToSort] ? -1 * sortDirection : sortDirection);
         this.setState({
-            sortDirection, people: this.state.people
+            sortDirection: this.sortDirection,
+            people: sorted
         });
     }
 

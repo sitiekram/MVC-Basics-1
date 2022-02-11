@@ -39,6 +39,7 @@
     <Compile Remove="Migrations\20211207170934_role created.Designer.cs" />
     <Compile Remove="Migrations\20211209090226_Analyzing.cs" />
     <Compile Remove="Migrations\20211209090226_Analyzing.Designer.cs" />
+    <Compile Remove="Models\PersonDTO.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,14 +47,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\PeopleList.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="JavaScriptEngineSwitcher.Extensions.MsDependencyInjection" Version="3.3.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.V8" Version="3.17.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.21" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.22" />
+    <PackageReference Include="Microsoft.ClearScript.V8" Version="7.2.2" />
     <PackageReference Include="Microsoft.ClearScript.V8.Native.win-x64" Version="7.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />

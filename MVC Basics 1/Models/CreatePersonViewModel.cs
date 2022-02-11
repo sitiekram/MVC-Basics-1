@@ -30,9 +30,9 @@ namespace MVC_Basics_1.Models
         //[Required]
         //public List<int> Languages { get; set; }
 
-        [Display(Name = "Country")]
-        [Required(ErrorMessage = "Select a country")]
-        public int CountryID { get; set; }
+        //[Display(Name = "Country")]
+        //[Required(ErrorMessage = "Select a country")]
+        //public int CountryID { get; set; }
 
         [Display(Name = "City")]
         [Required(ErrorMessage = "Select a city")]
