@@ -28,7 +28,7 @@ class PeopleTableHeader extends React.Component {
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">FUll Name <button className={"btn btn-outline-dark btn-sm"} onClick={this.props.sortTable}>&#8645;</button></th>
+                    <th scope="col">Full Name <button className={"btn btn-outline-dark btn-sm"} onClick={this.props.sortTable}>&#8645;</button></th>
                     <th scope="col">Details</th>
                 </tr>
             </thead>
@@ -43,7 +43,6 @@ class PeopleTable extends React.Component {
         people: [],
         sortDirection: 0
     }
-
     componentDidMount() {
         fetch("/React/People")
             .then(res => res.json())
@@ -62,6 +61,8 @@ class PeopleTable extends React.Component {
                 }
             );
     }
+    
+    
 
     sortTable = () => {
         let sortDirection = sortAsc;
@@ -71,17 +72,14 @@ class PeopleTable extends React.Component {
             sortDirection = sortDesc;
         }
 
-        const sorted = this.state.people.sort((a, b) => b[columnToSort] - a[columnToSort]);
-
-        //this.state.people.sort((x1, x2) => x1[columnToSort] < x2[columnToSort] ? -1 * sortDirection : sortDirection);
+        this.state.people.sort((x1, x2) => x1[columnToSort].toLowerCase() < x2[columnToSort].toLowerCase() ? -1 * sortDirection : sortDirection);
         this.setState({
-            sortDirection: this.sortDirection,
-            people: sorted
+            sortDirection, people: this.state.people
         });
     }
 
     render() {
-        const { error, isLoaded, people, sortDirection } = this.state;
+        const { error, isLoaded, people} = this.state;
         if (error) {
             return <Error message={error.message} />
         } else if (!isLoaded) {
@@ -90,7 +88,7 @@ class PeopleTable extends React.Component {
             return (
                 <table className="table table-striped">
                     <PeopleTableHeader sortTable={this.sortTable} />
-                    <PeopleTableRows onPersonDetails={this.props.onPersonDetails} people={people} sortOrder={sortDirection} />
+                    <PeopleTableRows onPersonDetails={this.props.onPersonDetails} people={people} />
                 </table>
             );
         }
